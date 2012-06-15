@@ -1,0 +1,12 @@
+{application, app,
+ [
+  {description, "A template for building servers with elli."},
+  {vsn, '1'},
+  {registered, []},
+  {applications, [
+    kernel,
+    stdlib
+    ]},
+  {mod, {app, []}},
+  {env, []}
+ ]}.
