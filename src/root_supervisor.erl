@@ -21,7 +21,7 @@ init([]) ->
   RestartStrategy = one_for_one,
   MaxRestarts = 3,
   RestartTimeframe = 10,
-  Port = config:get(port, 80),
+  Port = ef_config:app_get(app, port),
   EchoElliOpts = [{callback, http_handler},
                   {port,     Port}
                  ],

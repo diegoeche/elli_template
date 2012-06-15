@@ -9,8 +9,8 @@
 %% ===================================================================
 
 start(_StartType, _StartArgs) ->
-    config:init(),
-    root_supervisor:start_link().
+  config:init(),
+  root_supervisor:start_link().
 
 %% @doc Starts the backend dependencies.
 start_dependencies() ->
@@ -23,4 +23,4 @@ start_with_dependencies() ->
   application:start(app).
 
 stop(_State) ->
-    ok.
+  ok.
