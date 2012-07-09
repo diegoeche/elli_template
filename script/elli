@@ -1,0 +1,66 @@
+#!/bin/sh
+
+APP_MODULE=app
+APP_START_CMD=start_with_dependencies
+APP_DIR=`pwd`
+NAME=`basename $APP_DIR`
+NODE_NAME=$NAME@`hostname`
+COOKIE="omnomnomnom"
+
+
+# Try to get the process Pid
+case `uname -s` in
+    Linux|Darwin|FreeBSD|DragonFly|NetBSD|OpenBSD)
+        # PID COMMAND
+        PID=`ps ax -o pid= -o command= | grep "$APP_DIR/[ebin]" |awk '{print $1}'`
+        ;;
+esac
+
+
+# Set environment to `development` if not already set.
+if [ "$APP_ENV" = "" ]
+then
+    APP_ENV="development"
+fi
+
+
+# Check the first argument for instructions
+case "$1" in
+    start)
+        if [ "$PID" = "" ]
+        then
+            erl -detached -pa $APP_DIR/deps/*/ebin $APP_DIR/ebin -setcookie $COOKIE -name $NODE_NAME -s $APP_MODULE $APP_START_CMD
+        else
+            echo "VM is already running"
+        fi
+        ;;
+    console)
+        if [ "$PID" = "" ]
+        then
+            erl -pa $APP_DIR/deps/*/ebin $APP_DIR/ebin -setcookie $COOKIE -name $NODE_NAME -s $APP_MODULE $APP_START_CMD
+        else
+            echo "VM is already running"
+        fi
+        ;;
+    attach)
+        if [ "$PID" != "" ]
+        then
+            erl -name attached_$NAME@`hostname` -setcookie $COOKIE -remsh $NODE_NAME
+        else
+            echo "VM is not running"
+        fi
+        ;;
+    stop)
+        if [ "$PID" = "" ]
+        then
+            echo "VM is not running"
+        fi
+
+        while `kill -3 $PID 2>/dev/null`;
+        do
+            echo "Stopping VM"
+            sleep 1
+        done
+        ;;
+    esac
+exit 0

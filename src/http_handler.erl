@@ -1,6 +1,3 @@
-%% @author Diego Echeverri <diego.echeverri@wooga.net>
-%% @copyright 2012 Diego Echeverri, Wooga GmbH
-
 -module(http_handler).
 -export([handle/2, handle_event/3]).
 -behaviour(elli_handler).
