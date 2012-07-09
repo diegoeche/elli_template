@@ -6,7 +6,7 @@ handle(Req, _Args) ->
   handle(elli_request:method(Req), elli_request:path(Req), Req).
 
 handle('GET',[], _Req) ->
-  {ok, [], <<"Hello World!">>};
+  {ok, [], <<"Hello World!\n">>};
 
 handle(_, _, _) ->
   {404, [], <<"Not Found">>}.

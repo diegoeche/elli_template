@@ -1,7 +1,5 @@
 %% @author Johannes Huning <johannes.huning@wooga.net>
 %% @author Diego Echeverri <diego.echeverri@wooga.net>
-%% @copyright 2012 Wooga GmbH
-%% @doc Configuration access module.
 -module (config).
 -compile (export_all).
 
