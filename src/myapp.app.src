@@ -1,0 +1,39 @@
+{application, myapp, [
+    % A very short description of your application.
+    {description, "Erlang HTTP Server Template"},
+
+    % Pull the version number from git.
+    {vsn, git},
+
+    % All names of registered processes in the application. systools uses this
+    % list to detect name clashes between applications.
+    {registered, [
+        % Elli HTTP Server.
+        myapp_httpd
+    ]},
+
+    % All modules introduced by this application. systools uses this list when
+    % generating boot scripts and tar files. A module must be defined in one and
+    % only one application. Defaults to [].
+    % Populated by rebar.
+    {modules, []},
+
+    % All applications which must be started before this application is started.
+    % systools uses this list to generate correct boot scripts.
+    % Dependencies handles manually inside `myapp.erl`.
+    {applications, [kernel, stdlib]},
+
+    % The application master starts the application by calling the application
+    % callback function start/2 in the module, and with the start argument,
+    % defined here:
+    {mod, {myapp_app, []}},
+
+    % Configuration parameters: A list of {Par, Val} tuples, Par should be
+    % an atom, Val may be any term.
+    % The values specified here can be overridden by values in a system
+    % configuration file.
+    {env, [
+        % HTTP port to listen on.
+        {http_port, 4000}
+    ]}
+]}.
