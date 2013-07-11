@@ -24,3 +24,25 @@ order to run the application simply run:
 To test, simply:
 
     ./script/test
+
+## Deploying through Capistrano ##
+
+Please refer to the
+[Capistrano documentation](https://github.com/capistrano/capistrano) for questions
+regarding capistrano. In any other case, the procedure to deploy should be:
+
+1. Create a folder in the remote server(s) under:
+
+    /var/www/[[application]]
+
+You can change this location by editing `deploy.rb`
+
+2. Edit the files under:
+
+    ./config/deploy/*.rb
+
+And set the servers to the remote servers you want to deploy to.
+
+3. `cap [[environment]] deploy:setup`
+
+4. `cap [[environment]] deploy`
