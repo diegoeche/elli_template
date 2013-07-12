@@ -34,3 +34,16 @@ environment() ->
     false -> development;
     Value -> list_to_atom(Value)
   end.
+
+%% @doc Attempts to get the given key from the current environment,
+%%      returns the Default otherwise.
+get(Param, Default) ->
+  ?MODULE:get(app, Param, Default).
+
+%% @doc Attempts to get the given key from the specified app's environment,
+%%      returns the Default otherwise.
+get(App, Param, Default) ->
+  case application:get_env(App, Param) of
+    {ok, Value} -> Value;
+    _ -> Default
+  end.
