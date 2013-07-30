@@ -3,10 +3,9 @@
 APP_MODULE=app
 APP_START_CMD=start_with_dependencies
 APP_DIR=`pwd`
-NAME=`basename $APP_DIR`
+NAME=`basename $(git remote show -n origin | grep Fetch | cut -d: -f2-) | sed s/\.git//g`
 NODE_NAME=$NAME@`hostname`
 COOKIE="omnomnomnom"
-
 
 # Try to get the process Pid
 case `uname -s` in
